@@ -33,12 +33,19 @@ class QuestMarker extends TBX.Tile
         this.Collection = QuestMarker._QuestCollection;
         this.Index = 0;
         this.Size = new TBX.Vertex(Config.QuestMarkerSize,Config.QuestMarkerSize,1);
-        this.Position = new TBX.Vertex(Config.ScreenSize.X / 2 + Position * Config.QuestMarkerOffset, Config.ScreenSize.Y / 2 + Offset, 0.5);
+        let Direction = Position/Math.abs(Position);
+        let XPos:number = Config.ScreenSize.X / 2 + Direction * Config.QuestMarkerInitOffset + Position * Config.QuestMarkerOffset;
+        this.Position = new TBX.Vertex(XPos, Config.ScreenSize.Y / 2 + Offset, 0.5);
         this._Icon = TBX.SceneObjectUtil.CreateTile("Icon", null, this.Position, this.Size);
         this._Icon.Collection = QuestMarker._QuestCollection;
         if(Current.Type == "Rope") this._Icon.Index = 1;
         else if(Current.Type == "Treasure") this._Icon.Index = 2;
         else if(Current.Type == "Forge") this._Icon.Index = 1;
+    }
+    public SetColor(Color:TBX.Color) : void
+    {
+        this.Paint = Color;
+        this._Icon.Paint = Color;
     }
     public OnAttach(Args:any) : void
     {

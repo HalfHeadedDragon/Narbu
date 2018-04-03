@@ -20,14 +20,43 @@ let DefaultCampaign =
                 {
                     QuestID: "Quest1",
                     Type: "Treasure"
+                },
+                {
+                    QuestID: "Quest2",
+                    Type: "Rope"
                 }
+            ],
+            RightMarkers:
+            [
+                {
+                    QuestID: "Quest3",
+                    Type: "Rope"
+                },
             ]
         },
         {
             Name: "Second Stop",
             Depth: 1000,
             ForeColor: "#222222",
-            BackColor: "#88BB88"
+            BackColor: "#88BB88",
+            LeftMarkers:
+            [
+                {
+                    QuestID: "Quest1",
+                    Type: "Treasure"
+                },
+            ],
+            RightMarkers:
+            [
+                {
+                    QuestID: "Quest3",
+                    Type: "Treasure"
+                },
+                {
+                    QuestID: "Quest2",
+                    Type: "Forge"
+                }
+            ]
         },
         {
             Name: "Third Stop",

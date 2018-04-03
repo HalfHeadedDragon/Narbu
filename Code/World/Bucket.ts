@@ -52,6 +52,7 @@ class Bucket
                 this._OldOffset = this._Offset;
                 this._World.Location.Text = "";
                 this._World.Location.Update();
+                this._World.DestroyMarkers();
                 this._OldBackColor = this._GO.Stops[this._GO.Status.Stop].BackColor;
                 this._OldForeColor = this._GO.Stops[this._GO.Status.Stop].ForeColor
                 this._NewBackColor = this._GO.Stops[this._NewIndex].BackColor;
@@ -68,6 +69,7 @@ class Bucket
                 this._OldOffset = this._Offset;
                 this._World.Location.Text = "";
                 this._World.Location.Update();
+                this._World.DestroyMarkers();
                 this._OldBackColor = this._GO.Stops[this._GO.Status.Stop].BackColor;
                 this._OldForeColor = this._GO.Stops[this._GO.Status.Stop].ForeColor
                 this._NewBackColor = this._GO.Stops[this._NewIndex].BackColor;

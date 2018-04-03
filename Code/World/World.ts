@@ -31,6 +31,14 @@ class World extends TBX.Scene2D
         this.InitWell();
         this.InitUI();
     }
+    public DestroyMarkers() : void
+    {
+        for(let i in this._Markers)
+        {
+            this.Remove(this._Markers[i]);
+        }
+        this._Markers = [];
+    }
     public RefreshMarkers() : void
     {
         if(!this._GO)
@@ -41,12 +49,14 @@ class World extends TBX.Scene2D
         for(let i = 0; i < Stop.LeftMarkers.length; i++)
         {
             let Marker:QuestMarker = new QuestMarker(null, Stop.LeftMarkers[i], this._Bucket.Offset, -(i+1));
+            Marker.SetColor(this.Back.Paint);
             this._Markers.push(Marker);
             this.Attach(Marker);
         }
         for(let i = 0; i < Stop.RightMarkers.length; i++)
         {
             let Marker:QuestMarker = new QuestMarker(null, Stop.RightMarkers[i], this._Bucket.Offset, (i+1));
+            Marker.SetColor(this.Back.Paint);
             this._Markers.push(Marker);
             this.Attach(Marker);
         }
