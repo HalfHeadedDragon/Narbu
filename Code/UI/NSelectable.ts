@@ -2,7 +2,7 @@ export { NSelectable };
 
 import * as TBX from "engineer-js";
 
-import { Config } from "./Config";
+import { Config } from "./../Core/Config";
 
 class NSelectable extends TBX.Button
 {

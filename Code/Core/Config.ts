@@ -15,5 +15,7 @@ let Config:any =
     RopeInitialLength: 130,
     QuestMarkerInitOffset: 180,
     QuestMarkerOffset: 120,
-    QuestMarkerSize: 100
+    QuestMarkerIconSize: 70,
+    QuestMarkerSize: 90,
+    QuestMarkerTooltipOffset: 700
 }

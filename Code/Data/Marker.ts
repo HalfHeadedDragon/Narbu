@@ -25,13 +25,18 @@ class Marker
     {
         return new Marker(this);
     }
-    public Deserialize(Data:any) : void
+    public Deserialize(Data:any) : boolean
     {
         if(Data.Type && Data.QuestID)
         {
             this._Type = Data.Type;
             this._QuestID = Data.QuestID;
+            return true;
         }
-        else TBX.Log.Error("Marker Deserialize Failed!", Data, "Narbu_Data");
+        else
+        {
+            TBX.Log.Error("Marker Deserialize Failed!", Data, "Narbu_Data");
+            return false;
+        }
     }
 }

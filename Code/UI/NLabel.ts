@@ -2,7 +2,7 @@ export { NLabel }
 
 import * as TBX from "engineer-js";
 
-import { Config } from "./Config";
+import { Config } from "./../Core/Config";
 
 class NLabel extends TBX.Label
 {

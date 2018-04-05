@@ -2,9 +2,9 @@ export { Menu };
 
 import * as TBX from "engineer-js";
 
-import { Config } from "./../Core/Config";
-import { NLabel } from "./../Core/NLabel";
-import { NMenuButton } from "./../Core/NMenuButton";
+import { Config } from "./../../Core/Config";
+import { NLabel } from "./../../UI/NLabel";
+import { NMenuButton } from "./../../UI/NMenuButton";
 
 class Menu extends TBX.Scene2D
 {

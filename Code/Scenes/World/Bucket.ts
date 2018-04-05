@@ -2,9 +2,9 @@ export { Bucket }
 
 import * as TBX from "engineer-js";
 
-import { Config } from "./../Core/Config";
+import { Config } from "./../../Core/Config";
 import { World } from "./World";
-import { Campaign } from "./../Data/Campaign";
+import { Campaign } from "./../../Data/Campaign";
 
 class Bucket
 {
@@ -127,7 +127,7 @@ class Bucket
     }
     private InitArt() : void
     {
-        let BucketArt:TBX.ImageCollection = new TBX.ImageCollection(null, ["/Resources/Textures/StartScene/Bucket.png"]);
+        let BucketArt:TBX.ImageCollection = new TBX.ImageCollection(null, ["/Resources/Textures/World/Bucket.png"]);
         let Bucket:TBX.Tile = new TBX.Tile();
         Bucket.Collection = BucketArt;
         Bucket.Index = 0;

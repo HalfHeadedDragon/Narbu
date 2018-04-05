@@ -2,9 +2,10 @@ export { GameLogic };
 
 import * as TBX from "engineer-js";
 
-import { Menu } from "./Menu/Menu";
-import { World } from "./World/World";
-import { Slots } from "./Slots/Slots";
+import { Menu } from "./Scenes/Menu/Menu";
+import { World } from "./Scenes/World/World";
+import { Slots } from "./Scenes/Slots/Slots";
+import { CharacterClassPool } from "./Data/CharacterClass";
 
 class GameLogic
 {
@@ -16,6 +17,7 @@ class GameLogic
         this._Game.Name = "Narbu";
         this._Runner = new TBX.Runner(this._Game, TBX.DrawEngineType.ThreeJS);
         this._Runner.SetResolution(new TBX.Vertex(1920, 1080, 0));
+        let CCP:CharacterClassPool = new CharacterClassPool();
         this._Game.Attach(new Menu());
         this._Game.Attach(new Slots());
         this._Game.Attach(new World());

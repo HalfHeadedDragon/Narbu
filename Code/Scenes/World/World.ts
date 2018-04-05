@@ -2,12 +2,13 @@ export { World };
 
 import * as TBX from "engineer-js";
 
-import { Config } from "./../Core/Config";
-import { NLabel } from "./../Core/NLabel";
+import { Config } from "./../../Core/Config";
+import { NLabel } from "./../../UI/NLabel";
 import { Bucket } from "./Bucket";
 import { QuestMarker } from "./QuestMarker";
-import { Stop } from "./../Data/Stop";
-import { Campaign } from "./../Data/Campaign";
+import { Stop } from "./../../Data/Stop";
+import { Campaign } from "./../../Data/Campaign";
+import { QuestDetailsPanel } from "./QuestDetailsPanel";
 
 class World extends TBX.Scene2D
 {
@@ -16,6 +17,8 @@ class World extends TBX.Scene2D
     private _Bucket:Bucket;
     private _Location:NLabel;
     private _Markers:QuestMarker[];
+    private _LastHover:QuestMarker;
+    private _QuestDetails:QuestDetailsPanel;
     public get Back():TBX.Tile { return this._Back; }
     public get Location():NLabel { return this._Location; }
     public constructor()
@@ -30,9 +33,12 @@ class World extends TBX.Scene2D
         this._Markers = [];
         this.InitWell();
         this.InitUI();
+        this.Events.MouseMove.push(this.MouseMove.bind(this));
     }
     public DestroyMarkers() : void
     {
+        this._QuestDetails.Active = false;
+        this._QuestDetails.Update();
         for(let i in this._Markers)
         {
             this.Remove(this._Markers[i]);
@@ -41,6 +47,7 @@ class World extends TBX.Scene2D
     }
     public RefreshMarkers() : void
     {
+        Campaign.Current.Status.Color = this.Back.Paint.Copy();
         if(!this._GO)
         {
             this._GO = <Campaign>TBX.Runner.Current.Game.Data["GO"];
@@ -70,7 +77,7 @@ class World extends TBX.Scene2D
         Back.Fixed = true;
         this._Back = Back;
         this.Attach(Back);
-        let WellArt:TBX.ImageCollection = new TBX.ImageCollection(null, ["/Resources/Textures/StartScene/Well.png", "/Resources/Textures/StartScene/Depth.png"]);
+        let WellArt:TBX.ImageCollection = new TBX.ImageCollection(null, ["/Resources/Textures/World/Well.png", "/Resources/Textures/World/Depth.png"]);
         let Well:TBX.Tile = new TBX.Tile();
         Well.Collection = WellArt;
         Well.Index = 0;
@@ -85,13 +92,37 @@ class World extends TBX.Scene2D
     }
     private InitUI() : void
     {
-        let Location:NLabel = new NLabel(null, "Start");
-        Location.Position = new TBX.Vertex(200,150,0.2);
-        Location.Size = new TBX.Vertex(300,200,1);
-        Location.TextSize = 50;
-        Location.TextAlign = TBX.TextAlign.Left;
-        Location.ForeColor = TBX.Color.FromString(Config.DefaultForeColor);
-        this._Location = Location;
-        this.Attach(Location);
+        this._Location = new NLabel(null, "Start");
+        this._Location.Position = new TBX.Vertex(350,160);
+        this._Location.Size = new TBX.Vertex(600,200,1);
+        this._Location.TextSize = 35;
+        this._Location.TextAlign = TBX.TextAlign.Left;
+        this._Location.ForeColor = TBX.Color.FromString(Config.DefaultForeColor);
+        this.Attach(this._Location);
+        this._QuestDetails = new QuestDetailsPanel(null);
+        this.Attach(this._QuestDetails);
+    }
+    private MouseMove(G:TBX.Game, Args:any) : void
+    {
+        let Picked:QuestMarker = <QuestMarker>TBX.Runner.Current.PickSceneObject(Args.Location);
+        if(Picked)
+        {
+            if(this._LastHover == Picked) return;
+            if(this._LastHover != null) this._LastHover.SetColor(this.Back.Paint);
+            this._LastHover = Picked;
+            let NewForeColor = this.Back.Paint.Copy().Lighten().Lighten().Lighten();
+            Picked.SetColor(NewForeColor);
+            this._QuestDetails.Position = new TBX.Vertex(Picked.Data["XPos"], Config.QuestMarkerTooltipOffset);
+            this._QuestDetails.InitData(Picked.Data["Marker"].QuestID);
+            this._QuestDetails.SetColor(NewForeColor);
+            this._QuestDetails.Active = true;
+        }
+        else
+        {
+            if(this._LastHover == null) return;
+            this._LastHover.SetColor(this.Back.Paint);
+            this._LastHover = null;
+            this._QuestDetails.Active = false;
+        }
     }
 }

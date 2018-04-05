@@ -2,7 +2,7 @@ export { NButton };
 
 import * as TBX from "engineer-js";
 
-import { Config } from "./Config";
+import { Config } from "./../Core/Config";
 
 class NButton extends TBX.Button
 {

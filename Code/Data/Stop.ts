@@ -51,7 +51,7 @@ class Stop
     {
         return new Stop(this);
     }
-    public Deserialize(Data:any) : void
+    public Deserialize(Data:any) : boolean
     {
         if(Data.Name && Data.ForeColor && Data.BackColor)
         {
@@ -62,16 +62,21 @@ class Stop
             if(Data.LeftMarkers) for(let i in Data.LeftMarkers)
             {
                 let LoadedMarker:Marker = new Marker();
-                LoadedMarker.Deserialize(Data.LeftMarkers[i]);
+                if(!LoadedMarker.Deserialize(Data.LeftMarkers[i])) continue;
                 this._LeftMarkers.push(LoadedMarker);
             }
             if(Data.RightMarkers) for(let i in Data.RightMarkers)
             {
                 let LoadedMarker:Marker = new Marker();
-                LoadedMarker.Deserialize(Data.RightMarkers[i]);
+                if(!LoadedMarker.Deserialize(Data.RightMarkers[i])) continue;
                 this._RightMarkers.push(LoadedMarker);
             }
+            return true;
         }
-        else TBX.Log.Error("Stop Deserialize Failed!", Data, "Narbu_Data");
+        else
+        {
+            TBX.Log.Error("Stop Deserialize Failed!", Data, "Narbu_Data");
+            return false;
+        }
     }
 }

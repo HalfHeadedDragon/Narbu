@@ -2,11 +2,13 @@ export { Slots };
 
 import * as TBX from "engineer-js";
 
-import { Config } from "./../Core/Config";
-import { NLabel } from "./../Core/NLabel";
-import { NSelectable } from "./../Core/NSelectable";
-import { Campaign } from "./../Data/Campaign";
-import { DefaultCampaign } from "./../Data/DefaultCampaign";
+import { Config } from "./../../Core/Config";
+import { NLabel } from "./../../UI/NLabel";
+import { NSelectable } from "./../../UI/NSelectable";
+import { Campaign } from "./../../Data/Campaign";
+import { DefaultCampaign } from "./../../Data/DefaultCampaign";
+
+import { Brief } from "./../Brief/Brief";
 
 class Slots extends TBX.Scene2D
 {
@@ -59,6 +61,7 @@ class Slots extends TBX.Scene2D
     {
         let NewCampaign:Campaign = new Campaign();
         NewCampaign.Deserialize(DefaultCampaign);
+        TBX.Runner.Current.Game.Attach(new Brief());
         TBX.Runner.Current.Game.Data["GO"] = NewCampaign;
         TBX.Runner.Current.SwitchScene("World", false);
     }
