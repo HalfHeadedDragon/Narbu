@@ -33,10 +33,10 @@ class Brief extends TBX.Scene2D
     }
     private Init()
     {
-        this.BackColor = TBX.Color.Black;
+        this.BackColor = this._Campaign.Status.Color;
         this._Roster = new RosterPanel(null, this._Campaign.Roster);
         this._Roster.Position = new TBX.Vertex(1280, 740, 0.5);
-        this._Roster.SetColor(this._Campaign.Status.Color);
+        this._Roster.SetColor(TBX.Color.Black);
         this.Attach(this._Roster);
     }
 }

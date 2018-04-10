@@ -36,7 +36,7 @@ class RosterPanel extends TBX.Tile
     }
     private Init() : void
     {
-        this.Paint = TBX.Color.Black;
+        this.Paint = TBX.Color.Empty;
         this.Size = new TBX.Vertex(1200, 200);
     }
     public UpdateModel(Roster:Roster) : void

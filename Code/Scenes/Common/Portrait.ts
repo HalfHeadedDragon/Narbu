@@ -37,7 +37,7 @@ class Portrait extends TBX.Tile
         if(!Portrait.Collection)
         {
             Portrait.Collection = new TBX.ImageCollection(null, []);
-            for(let i = 0; i < 1; i++) Portrait.Collection.Images.push("/Resources/Textures/Common/Classes/Portrait"+i+".png");
+            for(let i = 0; i < 2; i++) Portrait.Collection.Images.push("/Resources/Textures/Common/Classes/Portrait"+i+".png");
         }
         this.Data["Pickable"] = true;
         this.Data["Portrait"] = true;
@@ -55,7 +55,7 @@ class Portrait extends TBX.Tile
     public UpdateModel() : void
     {
         if(!this._Character) return;
-        this.Index = this._Character.ArtIndex;
+        this.Index = 1;//this._Character.ArtIndex;
         this._Tooltip.UpdateModel(this._Character);
     }
     public OnAttach(Args:any) : void
