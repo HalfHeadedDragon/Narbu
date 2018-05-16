@@ -29,7 +29,8 @@ class Menu extends TBX.Scene2D
         this.Attach(new NMenuButton(null, "Continue", null, 1));
         this.Attach(new NMenuButton(null, "Game", this.GameClick.bind(this), 2));
         this.Attach(new NMenuButton(null, "Settings", null, 3));
-        this.Attach(new NMenuButton(null, "Credits", null, 4));
+        //this.Attach(new NMenuButton(null, "Credits", null, 4));
+        this.Attach(new NMenuButton(null, "Preview", this.PreviewClick.bind(this), 4));
     }
     private InitBack() : void
     {
@@ -51,5 +52,9 @@ class Menu extends TBX.Scene2D
     public CreditsClick(G:any, Args:any) : void
     {
         TBX.Runner.Current.SwitchScene("Credits", false);
+    }
+    public PreviewClick(G:any, Args:any) : void
+    {
+        TBX.Runner.Current.SwitchScene("Preview", false);
     }
 }

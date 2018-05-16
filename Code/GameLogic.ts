@@ -5,6 +5,7 @@ import * as TBX from "engineer-js";
 import { Menu } from "./Scenes/Menu/Menu";
 import { World } from "./Scenes/World/World";
 import { Slots } from "./Scenes/Slots/Slots";
+import { Preview } from "./Scenes/Preview/Preview";
 import { CharacterClassPool } from "./Data/CharacterClass";
 
 class GameLogic
@@ -21,6 +22,7 @@ class GameLogic
         this._Game.Attach(new Menu());
         this._Game.Attach(new Slots());
         this._Game.Attach(new World());
+        this._Game.Attach(new Preview());
     }
     public Run() : void
     {
